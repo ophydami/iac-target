@@ -21,9 +21,10 @@ resource "aws_s3_bucket" "agentcore_test_bucket" {
   }
 }
 
-# SNS Topic - No encryption configured
+# SNS Topic - Encryption enabled with AWS managed KMS key
 resource "aws_sns_topic" "notifications" {
-  name = var.sns_topic_name
+  name              = var.sns_topic_name
+  kms_master_key_id = "alias/aws/sns"
 
   tags = {
     Name        = "IaC Sync Notifications"
